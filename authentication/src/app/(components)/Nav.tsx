@@ -6,7 +6,9 @@ const Navbar = () => {
     <div>
         <header className="bg-gray-500 text-white">
             <nav className="flex justify-between items-center w-full px-10 py-4">
-                <div>My Site</div>
+                <div>
+                    <Link href="/">My Site</Link>
+                </div>
                 <div className="flex gap-10">
                     <Link href="/">Home</Link>
                     <Link href="/CreateUser">Create User</Link>

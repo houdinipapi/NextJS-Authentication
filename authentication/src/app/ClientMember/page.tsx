@@ -5,7 +5,7 @@ import React from 'react'
 const MemberClientSession = () => {
   return (
     <div>
-        MemberClientSession
+        <h1>Member Client Session</h1>
     </div>
   )
 }

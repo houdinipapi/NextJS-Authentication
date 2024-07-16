@@ -2,7 +2,9 @@ import React from 'react'
 
 const PublicPage = () => {
   return (
-    <div>PublicPage</div>
+    <div>
+        <h1>Public Page</h1>
+    </div>
   )
 }
 

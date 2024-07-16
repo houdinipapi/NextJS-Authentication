@@ -3,7 +3,8 @@ import React from 'react'
 const DeniedSession = () => {
   return (
     <div className="text-red-500">
-        Denied
+        <h1>Denied</h1>
+        
     </div>
   )
 }
