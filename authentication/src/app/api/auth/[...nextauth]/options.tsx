@@ -14,7 +14,7 @@ export const options = {
                 console.log("GitHub Profle: ", profile)
 
                 let userRole = "GitHub User"
-                if (profile?.email === "olivertim.ot@gmail.com"){
+                if (profile?.email === "ochiengcliff.co@gmail.com"){
                     userRole = "admin";
                 }
 
@@ -34,9 +34,9 @@ export const options = {
                 console.log("Google Profle: ", profile)
         
                 let userRole = "Google User"
-                // if (profile?.email == "olivertim.ot@gmail.com"){
-                //     userRole = "admin";
-                // }
+                if (profile?.email == "olivertim.ot@gmail.com"){
+                    userRole = "admin";
+                }
         
                 return {
                     ...profile,
@@ -55,9 +55,16 @@ export const options = {
             return token;
         },
         async session({session, token}: {session: any, token: any}) {
-            session.id = token.id;
-            session.role = token.role;
+            if (session?.user){
+                session.user.id = token.id;
+                session.user.role = token.role;
+
+                console.log(session.user.role)
+            }
             return session;
+            // session.id = token.id;
+            // session.role = token.role;
+            // return session;
         },
     }
 };
