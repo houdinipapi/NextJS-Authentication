@@ -11,6 +11,9 @@
   "dependencies": {
     "@auth/core": "^0.34.1",
     "@auth/nextjs": "^0.0.0-380f8d56",
+    "bcrypt": "^5.1.1",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.1",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
     "react": "^18",
