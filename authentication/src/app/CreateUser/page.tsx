@@ -1,13 +1,13 @@
 
 import React from 'react'
+import UserForm from '../(components)/UserForm';
 
 
 
 const CreateUser = () => {
   return (
     <div>
-        <h1>CreateUser</h1>
-        <p>Only Admins!</p>
+        <UserForm/>
     </div>
   )
 }
