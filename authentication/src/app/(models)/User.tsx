@@ -1,23 +1,66 @@
 import mongoose, { Schema } from "mongoose";
 
+// MongoDB connection URI from environment variable
+const MONGODB_URI = process.env.MONGODB_URI;
 
-// const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/mydatabase";
-// mongoose.connect(MONGODB_URI);
+// Check if MONGODB_URI is provided
+if (!MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URI environment variable inside .env.local");
+}
 
-mongoose.connect(process.env.MONGODB_URI)
-mongoose.Promise = global.Promise;
+// Mongoose connection options
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 
+// Singleton pattern for mongoose connection
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+async function connectToDatabase() {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI, options).then((mongoose) => {
+      return mongoose;
+    });
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
+
+// Define User schema with validation
 const userSchema = new Schema(
-    {
-        name: String,
-        email: String,
-        password: String,
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    {
-        timestamps: true,
-    }
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, "Please enter a valid email address"],
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
-const User = mongoose.models.User || mongoose.model("User", userSchema)
+// Create User model if it doesn't exist
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
-export default User;
+export { connectToDatabase, User };
