@@ -7,7 +7,8 @@ const MemberPage = async () => {
 
   const session: { user?: { email?: string, role?: string } } | null = await getServerSession(options)
 
-  // const session = await getServerSession(options)
+  console.log("Session:", session);
+
 
   if (!session) {
     redirect("/api/auth/signin?callbackUrl=/Member");
@@ -18,7 +19,7 @@ const MemberPage = async () => {
     <div>
         <h1>Member Page</h1>
         <p>{session?.user?.email}</p>
-        <p>{session?.user?.role}</p>
+        <p>{session?.user?.role || "Role not found"}</p>
 
     </div>
   )

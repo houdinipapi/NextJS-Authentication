@@ -59,7 +59,7 @@ export const options = {
                 session.user.id = token.id;
                 session.user.role = token.role;
 
-                console.log(session.user.role)
+                console.log(session.user.role);
             }
             return session;
             // session.id = token.id;
